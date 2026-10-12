@@ -58,6 +58,27 @@
 .qtf-burst i{position:absolute;left:0;top:0;width:8px;height:8px;border-radius:2px;background:var(--c,#ffd84d);box-shadow:0 0 8px var(--c,#ffd84d);opacity:0;animation:qtfPop 1.6s cubic-bezier(.1,.8,.3,1) var(--dl,0s) forwards}
 @keyframes qtfPop{0%{opacity:1;transform:translate(0,0) rotate(0) scale(.4)}70%{opacity:1}100%{opacity:0;transform:translate(var(--x),var(--y)) rotate(var(--r)) scale(1)}}
 @media (prefers-reduced-motion:reduce){.qt-ring,.qt-ring::before,.qtf-card::before,.qt-af,.qt-tap.on{animation:none}.qt-tip,.qt-tip.show,#qtFin,.qtf-card,.qt-bar i{transition:none}}
+
+/* keep the profile card visible in the left panel (Replay button made the column taller) */
+@media (min-width:1000px){
+.dash .sidein .nav,.dash .sidein .sinfo,.dash .sidein .lvcard,.dash .sidein .pbar,.dash .sidein .sbrand{flex:none}
+.dash .sidein #nvTour{padding:7px 14px!important;font-size:.84rem}
+.dash .sidein #nvTour svg{width:18px;height:18px}
+}
+@media (min-width:1000px) and (max-height:880px){
+.dash .sidein{gap:8px!important;padding-top:10px!important}
+.dash .sidein .nv{padding:7px 14px!important}
+.dash .sidein .sinfo{padding:10px 12px}
+.dash .sidein .sinfo h4{margin-bottom:6px}
+.dash .sidein .sinfo ul{gap:4px}
+.dash .sidein .sinfo li{font-size:.72rem;line-height:1.35}
+.dash .sidein .lvcard{padding:9px 14px!important}
+.dash .sidein .pbar{padding:12px!important;gap:8px 10px!important}
+}
+@media (min-width:1000px) and (max-height:720px){
+.dash .sidein .sinfo li{font-size:.68rem}
+.dash .sidein .sinfo li:nth-child(n+3){display:none}
+}
 </style> </head> <body> <canvas id="fx"></canvas> <div class="floor"></div> <main class="hero"> <canvas id="sci" aria-hidden="true"></canvas> <div class="stage"> <div class="logo" id="logo"> <svg viewBox="330 220 600 560" role="img" aria-label="QWIZO logo"> <defs> <linearGradient id="g" x1="0" y1="0" x2="1" y2="1"> <stop offset="0" stop-color="#ffd84d"/><stop offset=".5" stop-color="#ffb300"/><stop offset="1" stop-color="#7a4a00"/> </linearGradient> <filter id="glow" x="-30%" y="-30%" width="160%" height="160%"> <feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge> </filter> </defs> <g class="fill" filter="url(#glow)"> <path fill="url(#g)" fill-rule="evenodd" d="M356 505a268 259 0 1 0 536 0a268 259 0 1 0-536 0ZM458 505a166 158 0 1 0 332 0a166 158 0 1 0-332 0Z"/> <path fill="#ffc21a" d="M590 551C600 546 690 545 700 549C725 551 745 565 765 588L903 738C910 746 905 757 893 757L815 757C797 757 783 750 774 740L625 580C612 566 600 558 590 551Z"/> </g> <path class="neon" pathLength="1" fill-rule="evenodd" d="M356 505a268 259 0 1 0 536 0a268 259 0 1 0-536 0ZM458 505a166 158 0 1 0 332 0a166 158 0 1 0-332 0Z"/> <path class="neon" pathLength="1" d="M590 551C600 546 690 545 700 549C725 551 745 565 765 588L903 738C910 746 905 757 893 757L815 757C797 757 783 750 774 740L625 580C612 566 600 558 590 551Z"/> </svg> </div> </div> <h1 id="title" aria-label="QWIZO"><span style="--i:0">Q</span><span style="--i:1">W</span><span style="--i:2">I</span><span style="--i:3">Z</span><span style="--i:4">O</span></h1> <p class="tag"><span id="type"></span><i></i></p> <div class="homebtns"> <section class="guide glass tagbox" id="openFeatures" role="button" tabindex="0" aria-label="Explore. Press to open."> <p>Explore</p> </section> </div> </main> <section class="page2 dash" id="page2" aria-hidden="true" aria-labelledby="p2t">
 <div class="app">
 <aside class="side" aria-label="QWIZO menu"><div class="sidein">
@@ -764,6 +785,7 @@ var STEPS=[
 {t:"Welcome to QWIZO",x:"Let\u2019s take a quick tour. Each feature lights up one at a time, so you know exactly where everything is.",el:function(){return document.querySelector(".dmain .top")}},
 {t:"Spin the wheel",x:"Tap the wheel in Daily Boss Battle. It picks today\u2019s topic, then you can take an offline or online quiz on it.",el:function(){return $("wheelBtn")},tap:1,pad:14},
 {t:"Quiz generator",x:"Build a quiz your way. Offline works anywhere. Online needs internet and your own API key. Pick the exam, subject and chapters.",el:function(){return document.querySelector(".dmain .cards")}},
+{t:"Golden Flashcards",x:"Pick any chapter and flip through golden cards. Every correct answer earns double points (2\u00d7), so you level up and fill your weekly box faster.",el:function(){return document.querySelector(".fcbanner")},tap:1,pad:10},
 {t:"Daily goals",x:"Set how many questions you want to answer each day. The bar fills as you practise, and your streak counts every day you show up.",el:function(){var g=$("goalbar");return g&&g.parentElement}},
 {t:"Mistake to Mastery",x:"Questions you get wrong or skip are saved here. Practise them again until they stick and turn mistakes into marks.",el:function(){return $("mmSec")}},
 {t:"Start a quiz",x:"Open the offline generator, choose what to practise and begin. Every correct answer earns points toward new levels and treasure boxes.",el:function(){return document.querySelector('.og[data-mode="offline"]')},tap:1,pad:8}
